@@ -1,0 +1,92 @@
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background:rgb(139, 2, 2);
+  font-family: Arial, sans-serif;
+}
+.container {
+  display: flex;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.image-section {
+  width: 300px;
+  height: 400px;
+  background: url('') no-repeat center;
+  background-size: cover;
+  border-radius: 20px 0 0 20px;
+}
+.login-section {
+  width: 300px;
+  padding: 40px;
+  text-align: center;
+  color:red;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0 20px 20px 0;
+}
+.login-section h2 {
+  margin-bottom: 20px;
+  margin-top: 5px;
+  color:red(255, 255, 255);
+}
+.login-section input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-bottom: 1px solid red;
+  background: transparent;
+  color: red;
+}
+.password-container {
+  position: relative;
+}
+.password-container input {
+  width: 85%;
+  padding-right: 40px;
+}
+.password-container .toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: red;
+  cursor: pointer;
+}
+.login-section button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(to right, rgb(205, 110, 110),red);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+.login-section a {
+  display: block;
+  margin-top: 20px;
+  color: red;
+  text-decoration: none;
+}
+.login-section a:hover {
+  text-decoration: underline;
+}
+
+
+.login-section h2 {
+  color: red;
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-family: 'mukta', sans-serif;
+}
+

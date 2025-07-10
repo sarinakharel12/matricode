@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CareWise Planner</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      color: #b22222;
+    }
+
+    /* Navbar */
+    #header {
+      width: 100%;
+      height: 70px;
+      background-color: #b22222;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 25px;
+      box-shadow: 0 3px 8px rgba(178, 34, 34, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    #header .logo {
+      font-size: 2.3rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    #header nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    #header nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    #header nav ul li a {
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+      text-decoration: none;
+    }
+
+    #header nav ul li a:hover,
+    #header nav ul li a.active {
+      background-color: #fff;
+      color: #b22222;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: white;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 30px auto 60px;
+      padding: 0 20px;
+    }
+
+    .section-box {
+      background-color: white;
+      border-left: 6px solid #b22222;
+      padding: 25px 30px;
+      
+      margin-bottom: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(178, 34, 34, 0.15);
+    }
+
+    li{
+       
+       list-style: none;
+
+
+    }
+
+    .section-box h2 {
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+      color: #6e0000;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #b22222;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-bottom: 12px;
+      color: #6e0000;
+    }
+
+    button {
+      background-color: #b22222;
+      color: white;
+      font-weight: 700;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #6e0000;
+    }
+
+    /* To-do list styling */
+    .todo-item {
+      margin-bottom: 15px;
+      background-color: white;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #b22222;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .todo-item span {
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .todo-item input[type="checkbox"] {
+      align-self: flex-start;
+      transform: scale(1.2);
+    }
+
+    #jobscope h4 {
+      color: #b22222;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+
+    #jobscope ul {
+      margin-left: 20px;
+    }
+ #footer {
+      background-color: #f7f0f0;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      gap: 40px;
+      color: #6e0000;
+      font-size: 0.9rem;
+    }
+
+    #footer div {
+      flex: 1 1 180px;
+      min-width: 180px;
+    }
+
+    #footer h3 {
+      margin-bottom: 15px;
+      font-weight: 700;
+      color: #b22222;
+    }
+
+    #footer p,
+    #footer button {
+      margin-bottom: 10px;
+    }
+
+    #footer button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 8px;
+      background-color: #b22222;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #footer button:hover {
+      background-color: #6e0000;
+    }
+
+    /* Social Media Icons */
+    .socialmedia a {
+      margin-right: 15px;
+      font-size: 1.4rem;
+      color: #b22222;
+      transition: color 0.3s ease;
+    }
+
+    .socialmedia a:hover {
+      color: #6e0000;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      #header nav ul {
+        flex-direction: column;
+        background-color: #b22222;
+        position: fixed;
+        top: 70px;
+        right: -250px;
+        width: 220px;
+        height: calc(100% - 70px);
+        padding: 20px;
+        gap: 20px;
+        transition: right 0.3s ease-in-out;
+        border-radius: 0 0 0 10px;
+        z-index: 1000;
+      }
+      #header nav ul.show {
+        right: 0;
+      }
+      .hamburger {
+        display: block;
+      }
+      .search-bar {
+        margin: 15px 10px;
+        justify-content: center;
+      }
+      #upload {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+      .product-list {
+        justify-content: center;
+      }
+      #footer {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      #header nav ul {
+        flex-direction: column;
+        background-color: #b22222;
+        position: fixed;
+        top: 70px;
+        right: -250px;
+        width: 220px;
+        height: calc(100% - 70px);
+        padding: 20px;
+        gap: 20px;
+        transition: right 0.3s ease-in-out;
+        border-radius: 0 0 0 10px;
+        z-index: 1000;
+      }
+
+      #header nav ul.show {
+        right: 0;
+      }
+
+      .hamburger {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <div class="logo">अस्तित्व</div>
+    <nav>
+      <ul id="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a class="active" href="skill.html">Skill</a></li>
+        <li><a href="market.html">Market</a></li>
+        <li><a href="community.html">Community</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+    </nav>
+  </header>
+
+  <main class="container">
+    
+    
+    <!-- Skills to Learn -->
+     <div class="section-box">
+      <h2>Skills to Learn (Hours)</h2>
+      <ul id="timeList"></ul>
+      <input type="text" id="skillName" placeholder="Skill name">
+      <input type="number" id="skillTime" placeholder="Hours (e.g., 2)">
+      <button onclick="addTime()">Add Skill</button>
+    </div> 
+
+    <!-- Job Market -->
+     <div class="section-box">
+      <h2>Job Market Scope</h2>
+      <input type="text" id="jobInput" placeholder="Enter job title or skill">
+      <button onclick="showjobscope()">Find Jobs</button>
+      <div id="jobscope"></div>
+    </div>
+  </main>
+  <section id="footer">
+    <div class="about">
+      <h3>About Creative Zone</h3>
+      <p>
+        Creative Zone is a platform that connects creative <br />
+        individuals with customers looking for unique products and services.<br />
+        We believe in the power of creativity and aim to<br />
+        provide a space where artists, designers, and makers can showcase their talents.
+      </p>
+    </div>
+    <div class="customercare">
+      <h3>Customer Care</h3>
+      <h4>Help Center</h4>
+      <p>How to buy</p>
+      <button>Contact us</button>
+    </div>
+    <div class="aboutus">
+      <h3>About Us</h3>
+      <p>Our Story</p>
+      <p>Our Team</p>
+      <p>Careers</p>
+    </div>
+    <div class="legal">
+      <h3>Legal</h3>
+      <p>Terms of Service</p>
+      <p>Privacy Policy</p>
+      <p>Refund Policy</p>
+    </div>
+    <div class="socialmedia">
+      <h3>Follow Us</h3>
+      <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.linkedin.com"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </section>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("nav-links");
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    
+
+    // Skills
+    function addTime() {
+      const task = document.getElementById("skillName").value.trim();
+      const hours = document.getElementById("skillTime").value.trim();
+      if (task && hours && !isNaN(hours)) {
+        const li = document.createElement("li");
+        li.textContent = `${task} - ${hours} hrs`;
+        document.getElementById("timeList").appendChild(li);
+        document.getElementById("skillName").value = "";
+        document.getElementById("skillTime").value = "";
+      }
+    }
+
+    // Job Scope
+    function showjobscope() {
+      const input = document.getElementById("jobInput").value.trim().toLowerCase();
+      const jobScopeDiv = document.getElementById("jobscope");
+      jobScopeDiv.innerHTML = "";
+      if (input) {
+        const jobs = skilldata[input];
+        if (jobs) {
+          for (const [jobTitle, tasks] of Object.entries(jobs)) {
+            const jobElement = document.createElement("div");
+            jobElement.innerHTML = `<h4>${jobTitle}</h4><ul>${tasks.map(task => `<li>${task}</li>`).join("")}</ul>`;
+            jobScopeDiv.appendChild(jobElement);
+          }
+        } else {
+          jobScopeDiv.innerHTML = "<p>No jobs found for this skill.</p>";
+        }
+      } else {
+        jobScopeDiv.innerHTML = "<p>Please enter a skill or job title.</p>";
+      }
+    }
+
+    // Job Skill JSON
+    const skilldata = {
+      knitting: {
+        "Knitting Instructor": [
+          "Teach knitting classes at local community centers or online platforms.",
+          "Create and sell knitting patterns and kits.",
+          "Offer private knitting lessons."
+
+        ]
+      },
+      cooking: {
+        "Personal Chef": [
+          "Prepare meals for individuals or families based on dietary preferences.",
+          "Offer meal prep services for busy clients."
+        ],
+        "Cooking Instructor": [
+          "Teach cooking classes at schools or community centers."
+        ]
+      },
+      computer: {
+        "Accountant": [
+          "Manage financial records for small businesses or individuals.",
+          "Offer bookkeeping services remotely."
+        ],
+        "Programmer": [
+          "Develop software applications or websites for clients.",
+          "Offer freelance programming services."
+        ]
+      },
+      childcare: {
+        "Nanny": [
+          "Provide childcare services for families.",
+          "Offer babysitting services during weekends."
+        ],
+        "Childcare Provider": [
+          "Run a home-based daycare for young children.",
+          "Offer after-school care for school-aged children."
+        ]
+      }
+    };
+  </script>
+</body>
+</html> 

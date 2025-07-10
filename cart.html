@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Cart</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fdfdfd;
+      color: #333;
+    }
+
+    h1 {
+      color: #d90429;
+      margin-bottom: 10px;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+    }
+
+    /* Top bar container */
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+
+    .search-bar {
+      display: flex;
+      flex: 1;
+      max-width: 500px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 10px 15px;
+      border: 1px solid #ccc;
+      border-right: none;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search-bar button {
+      background-color: #e63946;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s ease;
+    }
+
+    .search-bar button:hover {
+      background-color: #d62839;
+    }
+
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .action-buttons button {
+      background-color: #f77f00;
+      color: #fff;
+      padding: 12px 20px;
+      border: none;
+      font-size: 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .action-buttons button:hover {
+      background-color: #f48c06;
+      transform: translateY(-2px);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 12px;
+      margin-bottom: 30px;
+    }
+
+    thead tr {
+      background-color: #d90429;
+      color: white;
+      font-weight: 600;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      vertical-align: middle;
+      text-align: left;
+    }
+
+    tbody tr {
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    tbody tr:hover {
+      background-color: #fff0f2;
+      transform: scale(1.01);
+    }
+
+    img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      padding: 6px 12px;
+      margin: 0 4px;
+      cursor: pointer;
+      border: none;
+      background-color:#f0f0f0;
+      color: white;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+    }
+
+    button:hover {
+      background-color: #d62839;
+      transform: translateY(-1px);
+    }
+
+    .qty-btns {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 16px;
+    }
+
+    .qty-btns span {
+      min-width: 24px;
+      text-align: center;
+      font-weight: 600;
+      color: #444;
+    }
+
+    #totalAmount {
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-align: right;
+      color: #d90429;
+      margin-top: 20px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .action-buttons {
+        justify-content: center;
+      }
+
+      .search-bar {
+        width: 100%;
+      }
+
+      #totalAmount {
+        text-align: center;
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Your Cart</h1>
+
+   <!-- Search and Action Buttons -->
+   <div class="top-bar">
+    <div class="search-bar">
+      <input type="text" placeholder="Search in your cart..." id="searchInput" />
+      <button onclick="searchCart()">Search</button>
+    </div>
+
+    <!-- <div class="action-buttons">
+      <button onclick="window.location.href='upload-product.html'">Upload Your Product</button>
+      <button onclick="window.location.href='upload-recipe.html'">Upload Your Recipe</button>
+    </div> -->
+  </div>
+
+  <!--  Cart Table -->
+  <table aria-label="Shopping cart items">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Type</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Details</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>Total</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="cartItems"></tbody>
+  </table>
+
+  <h2 id="totalAmount">Total: Rs. 0.00</h2>
+
+  <!-- JS Logic -->
+  <script>
+    function getCart() {
+      return JSON.parse(localStorage.getItem("cart")) || [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+
+    function updateQuantity(index, change) {
+      const cart = getCart();
+      if (cart[index]) {
+        cart[index].quantity += change;
+        if (cart[index].quantity < 1) {
+          cart[index].quantity = 1;
+        }
+        saveCart(cart);
+        renderCart();
+      }
+    }
+
+    function removeItem(index) {
+      const cart = getCart();
+      if (cart[index]) {
+        cart.splice(index, 1);
+        saveCart(cart);
+        renderCart();
+      }
+    }
+
+    function renderCart() {
+      const cart = getCart();
+      const cartItems = document.getElementById("cartItems");
+      const totalAmount = document.getElementById("totalAmount");
+      const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+
+      let total = 0;
+      cartItems.innerHTML = "";
+
+      cart.forEach((item, index) => {
+        if (!item.name.toLowerCase().includes(searchTerm)) return;
+
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        cartItems.innerHTML += `
+          <tr>
+            <td>${index + 1}</td>
+            <td>${item.type}</td>
+            <td><img src="${item.image}" alt="${item.name}"></td>
+            <td>${item.name}</td>
+            <td>${item.type === 'recipe' ? `Ingredients: ${item.ingredients}` : '—'}</td>
+            <td>Rs. ${item.price.toFixed(2)}</td>
+            <td>
+              <div class="qty-btns">
+                <button onclick="updateQuantity(${index}, -1)">-</button>
+                <span>${item.quantity}</span>
+                <button onclick="updateQuantity(${index}, 1)">+</button>
+              </div>
+            </td>
+            <td>Rs. ${itemTotal.toFixed(2)}</td>
+            <td><button onclick="removeItem(${index})">Remove</button></td>
+          </tr>
+        `;
+      });
+
+      totalAmount.textContent = `Total: Rs. ${total.toFixed(2)}`;
+
+      if (cart.length === 0 || cartItems.innerHTML === "") {
+        cartItems.innerHTML = `
+          <tr><td colspan="9" style="text-align:center; padding: 30px; color: #999;">
+            Your cart is empty.
+          </td></tr>
+        `;
+        totalAmount.textContent = "Total: Rs. 0.00";
+      }
+    }
+
+    function searchCart() {
+      renderCart();
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>

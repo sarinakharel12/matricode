@@ -1,0 +1,462 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Women’s Community</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+     * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+      text-decoration: none;
+    }
+
+    body {
+      background-color: #fff;
+      color: #333;
+    }
+      header {
+      width: 100%;
+      height: 70px;
+      background-color: #b22222;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 25px;
+      box-shadow: 0 3px 8px rgba(178, 34, 34, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 2.3rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 25px;
+      list-style: none;
+    }
+
+    nav ul li a {
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      background-color: #fff;
+      color: #b22222;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      color: white;
+      cursor: pointer;
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: white;
+    }
+    .container {
+      flex: 1;
+      max-width: 900px;
+      margin: 40px auto 60px;
+      padding: 0 15px;
+      width: 100%;
+    }
+    .language-select {
+      margin-bottom: 25px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      font-weight: 600;
+    }
+    .language-select label {
+      color: #b22222;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .language-select select {
+      padding: 6px 10px;
+      font-size: 1rem;
+      border: 2px solid #b22222;
+      border-radius: 6px;
+      outline: none;
+      cursor: pointer;
+      color: #b22222;
+      background: #fff;
+      transition: border-color 0.3s ease;
+    }
+    .language-select select:focus {
+      border-color: #6e0000;
+    }
+    h1#title {
+      text-align: center;
+      color: #b22222;
+      font-size: 2.4rem;
+      margin-bottom: 40px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    #addJourneyBtn {
+      display: block;
+      margin: 0 auto 40px;
+      background-color: #b22222;
+      color: white;
+      font-weight: 700;
+      padding: 14px 30px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(178, 34, 34, 0.4);
+      transition: background-color 0.3s ease;
+      max-width: 300px;
+      width: 100%;
+    }
+    #addJourneyBtn:hover {
+      background-color: #6e0000;
+      box-shadow: 0 6px 20px rgba(110, 0, 0, 0.6);
+    }
+    #journeyForm {
+      max-width: 700px;
+      margin: 0 auto 50px;
+      background:WHITE;
+      padding: 25px 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(178, 34, 34, 0.2);
+      display: none;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    label {
+      font-weight: 700;
+      color: #6e0000;
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+    input[type="text"],
+    textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #b22222;
+      border-radius: 8px;
+      font-size: 1rem;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+      color: #6e0000;
+    }
+    input[type="text"]:focus,
+    textarea:focus {
+      border-color: #6e0000;
+      outline: none;
+    }
+    #submitJourney,
+    #cancelJourney {
+      width: 48%;
+      padding: 12px 0;
+      border: none;
+      border-radius: 40px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(178, 34, 34, 0.3);
+      transition: background-color 0.3s ease;
+      color: white;
+      margin-top: 10px;
+    }
+    #submitJourney { background-color: #b22222; float: left; }
+    #submitJourney:hover { background-color: #6e0000; }
+    #cancelJourney { background-color: #a83232; float: right; }
+    #cancelJourney:hover { background-color: #731919; }
+    #communityFeed {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .journey {
+      background: #fff0f0;
+      border-left: 6px solid #b22222;
+      padding: 20px 25px;
+      margin-bottom: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(178, 34, 34, 0.15);
+      position: relative;
+    }
+    .journey .title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+      color: #b22222;
+    }
+    .journey .content {
+      color: #6e0000;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      white-space: pre-wrap;
+    }
+    .journey .author {
+      font-style: italic;
+      color: #a83232;
+      font-size: 0.9rem;
+      text-align: right;
+    }
+    .journey button {
+      background-color: #e56b6f;
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .journey button:hover {
+      background-color: #c85559;
+    }
+    @media (max-width: 768px) {
+      #header nav ul {
+        flex-direction: column;
+        background-color: #b22222;
+        position: fixed;
+        top: 70px;
+        right: -250px;
+        width: 220px;
+        height: calc(100% - 70px);
+        padding: 20px;
+        gap: 20px;
+        transition: right 0.3s ease-in-out;
+        border-radius: 0 0 0 10px;
+        z-index: 1000;
+      }
+      #header nav ul.show {
+        right: 0;
+      }
+      .hamburger {
+        display: block;
+      }
+      .container {
+        margin: 20px 15px 50px;
+      }
+      #journeyForm {
+        width: 100%;
+        padding: 20px;
+      }
+      #submitJourney, #cancelJourney {
+        width: 100%;
+        float: none;
+        margin-top: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="header">
+    <div class="logo">अस्तित्व</div>
+    <nav>
+      <ul id="nav-links">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="skill.html">Skill</a></li>
+        <li><a href="market.html">Market</a></li>
+        <li><a class="active" href="community.html">Community</a></li>
+      </ul>
+      <div class="hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="language-select">
+      <label for="language">Select Language:</label>
+      <select id="language" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="ne">Nepali</option>
+      </select>
+    </div>
+
+    <h1 id="title">Women’s Community</h1>
+
+    <button id="addJourneyBtn" onclick="showForm()">Add Your Journey</button>
+
+    <div id="journeyForm">
+      <div class="form-group">
+        <label for="journeyTitle">Title:</label>
+        <input type="text" id="journeyTitle" placeholder="Enter title" />
+      </div>
+      <div class="form-group">
+        <label for="journeyContent">Share your journey:</label>
+        <textarea id="journeyContent" rows="5" placeholder="Write here..."></textarea>
+      </div>
+      <div class="form-group">
+        <label for="journeyAuthor">Your Name (optional):</label>
+        <input type="text" id="journeyAuthor" placeholder="Enter your name" />
+      </div>
+      <button id="submitJourney" onclick="submitJourney()">Submit</button>
+      <button id="cancelJourney" onclick="hideForm()">Cancel</button>
+    </div>
+
+    <div id="communityFeed"></div>
+  </div>
+
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("nav-links");
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("show");
+    });
+
+    const translations = {
+      en: {
+        title: "Women’s Community",
+        button: "Add Your Journey",
+        labels: {
+          title: "Title:",
+          content: "Share your journey:",
+          author: "Your Name (optional):",
+        },
+        placeholders: {
+          title: "Enter title",
+          content: "Write here...",
+          author: "Enter your name",
+        },
+        submit: "Submit",
+        cancel: "Cancel",
+        error: "Please fill in both title and journey content!",
+      },
+      ne: {
+        title: "महिला समुदाय",
+        button: "आफ्नो कथा थप्नुहोस्",
+        labels: {
+          title: "शीर्षक:",
+          content: "आफ्नो कथा यहाँ लेख्नुहोस्:",
+          author: "तपाईंको नाम (वैकल्पिक):",
+        },
+        placeholders: {
+          title: "शीर्षक प्रविष्ट गर्नुहोस्",
+          content: "यहाँ लेख्नुहोस्...",
+          author: "तपाईंको नाम लेख्नुहोस्",
+        },
+        submit: "पेश गर्नुहोस्",
+        cancel: "रद्द गर्नुहोस्",
+        error: "कृपया शीर्षक र कथा दुवै भर्नुहोस्!",
+      },
+    };
+
+    let selectedLanguage = "en";
+    const journeys = [];
+
+    function changeLanguage() {
+      selectedLanguage = document.getElementById("language").value;
+      updateText();
+    }
+
+    function updateText() {
+      let t = translations[selectedLanguage];
+      document.getElementById("title").textContent = t.title;
+      document.getElementById("addJourneyBtn").textContent = t.button;
+      document.querySelector('label[for="journeyTitle"]').textContent = t.labels.title;
+      document.querySelector('label[for="journeyContent"]').textContent = t.labels.content;
+      document.querySelector('label[for="journeyAuthor"]').textContent = t.labels.author;
+      document.getElementById("journeyTitle").placeholder = t.placeholders.title;
+      document.getElementById("journeyContent").placeholder = t.placeholders.content;
+      document.getElementById("journeyAuthor").placeholder = t.placeholders.author;
+      document.getElementById("submitJourney").textContent = t.submit;
+      document.getElementById("cancelJourney").textContent = t.cancel;
+    }
+
+    function showForm() {
+      document.getElementById("journeyForm").style.display = "block";
+      document.getElementById("addJourneyBtn").style.display = "none";
+    }
+
+    function hideForm() {
+      document.getElementById("journeyForm").style.display = "none";
+      document.getElementById("addJourneyBtn").style.display = "block";
+      document.getElementById("journeyTitle").value = "";
+      document.getElementById("journeyContent").value = "";
+      document.getElementById("journeyAuthor").value = "";
+    }
+
+    function submitJourney() {
+      let title = document.getElementById("journeyTitle").value.trim();
+      let content = document.getElementById("journeyContent").value.trim();
+      let author = document.getElementById("journeyAuthor").value.trim() || "Anonymous";
+      let t = translations[selectedLanguage];
+
+      if (title && content) {
+        journeys.push({ title, content, author });
+        saveJourneysToStorage();
+        hideForm();
+        displayJourneys();
+      } else {
+        alert(t.error);
+      }
+    }
+
+    function displayJourneys() {
+      let feed = document.getElementById("communityFeed");
+      feed.innerHTML = "";
+      journeys.forEach((journey, index) => {
+        let journeyDiv = document.createElement("div");
+        journeyDiv.className = "journey";
+        journeyDiv.innerHTML = `
+          <div class="title">${journey.title}</div>
+          <div class="content">${journey.content}</div>
+          <div class="author">— ${journey.author}</div>
+          <button onclick="deleteJourney(${index})">Delete</button>
+        `;
+        feed.appendChild(journeyDiv);
+      });
+    }
+
+    function deleteJourney(index) {
+      if (confirm("Are you sure you want to delete this entry?")) {
+        journeys.splice(index, 1);
+        saveJourneysToStorage();
+        displayJourneys();
+      }
+    }
+
+    function saveJourneysToStorage() {
+      localStorage.setItem("communityJourneys", JSON.stringify(journeys));
+    }
+
+    function loadJourneysFromStorage() {
+      const data = localStorage.getItem("communityJourneys");
+      if (data) {
+        journeys.push(...JSON.parse(data));
+        displayJourneys();
+      }
+    }
+    updateText();
+    loadJourneysFromStorage();
+  </script>
+</body>
+</html>
